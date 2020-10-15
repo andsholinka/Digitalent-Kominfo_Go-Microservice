@@ -1,10 +1,14 @@
 package main
 
 import (
-	"github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/menu-service/config"
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/menu-service/config"
+	"github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/menu-service/database"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 
 	"github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/menu-service/handler"
 	"github.com/gorilla/mux"
@@ -13,14 +17,14 @@ import (
 func main() {
 	cfg := config.Config{
 		Database: config.Database{
-			Driver: "mysql",
-			Host: "localhost",
-			Port: "3306",
-			User: "root",
+			Driver:   "mysql",
+			Host:     "localhost",
+			Port:     "3306",
+			User:     "root",
 			Password: "admin",
-			DbName: "digitalent_microservice",
-			Config: "charset=utf8&parseTime=True&loc=Local",
-		}
+			DbName:   "digitalent_microservice",
+			Config:   "charset=utf8&parseTime=True&loc=Local",
+		},
 	}
 
 	db, err := initDB(cfg.Database)
@@ -31,7 +35,12 @@ func main() {
 
 	router := mux.NewRouter()
 
-	router.Handle("/add-menu", http.HandlerFunc(handler.AddMenu))
+	menuHandler := handler.MenuHandler{
+		Db: db,
+	}
+
+	router.Handle("/add-menu", http.HandlerFunc(menuHandler.AddMenu))
+	router.Handle("/menu", http.HandlerFunc(menuHandler.GetMenu))
 
 	fmt.Println("Menu service listen on port :8000")
 	log.Panic(http.ListenAndServe(":8000", router))
@@ -49,6 +58,7 @@ func initDB(dbConfig config.Database) (*gorm.DB, error) {
 		return nil, err
 	}
 
+	fmt.Println("Connection to DB")
+
 	return db, nil
 }
-
