@@ -3,8 +3,14 @@ package handler
 import (
 	"net/http"
 
+	"gorm.io/gorm"
+
 	"github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/menu-service/utils"
 )
+
+type AuthDB struct {
+	Db *gorm.DB
+}
 
 func ValidateAuth(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
@@ -24,4 +30,23 @@ func ValidateAuth(w http.ResponseWriter, r *http.Request) {
 	}
 
 	utils.WrapAPISuccess(w, r, "success", 200)
+}
+
+//TODO Buat signup
+
+func (db *AuthDB) SignUp(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		utils.WrapAPIError(w, r, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
+		return
+	}
+
+	//TODO Buat login
+}
+
+func (db *AuthDB) Login(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		utils.WrapAPIError(w, r, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
+		return
+	}
+
 }

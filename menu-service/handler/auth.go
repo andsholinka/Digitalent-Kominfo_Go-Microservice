@@ -5,14 +5,14 @@ import (
 	"io/ioutil"
 	"net/http"
 
+	"github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/menu-service/config"
 	"github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/menu-service/utils"
-	"github.com/wskurniawan/intro-microservice/service-product/config"
 	// "github.com/wskurniawan/intro-microservice/service-product/config"
 	// "github.com/wskurniawan/intro-microservice/utils"
 )
 
 type AuthHandler struct {
-	Config config.AuthService
+	Config config.Auth
 }
 
 func (handler *AuthHandler) ValidateAdmin(nextHandler http.HandlerFunc) http.HandlerFunc {
