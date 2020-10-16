@@ -1,11 +1,14 @@
 package handler
 
 import (
+	"encoding/json"
+	"io/ioutil"
 	"net/http"
 
 	"gorm.io/gorm"
 
-	"github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/menu-service/utils"
+	"github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/auth-service/database"
+	"github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/utils"
 )
 
 type AuthDB struct {
@@ -39,6 +42,31 @@ func (db *AuthDB) SignUp(w http.ResponseWriter, r *http.Request) {
 		utils.WrapAPIError(w, r, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
 		return
 	}
+
+	body, err := ioutil.ReadAll(r.Body)
+	defer r.Body.Close()
+	if err != nil {
+		utils.WrapAPIError(w, r, "cannot read body", http.StatusBadRequest)
+		return
+	}
+
+	var signup database.Auth
+
+	err = json.Unmarshal(body, &signup)
+	if err != nil {
+		utils.WrapAPIError(w, r, "error unmarshal : "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	signup.Token = utils.IdGenerator()
+	err = signup.SignUp(db.Db)
+	if err != nil {
+		utils.WrapAPIError(w, r, err.Error(), http.StatusBadRequest)
+
+	}
+
+	utils.WrapAPIError(w, r, "Success", http.StatusOK)
+	return
 
 	//TODO Buat login
 }
