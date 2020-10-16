@@ -25,6 +25,9 @@ func main() {
 			DbName:   "digitalent_microservice",
 			Config:   "charset=utf8&parseTime=True&loc=Local",
 		},
+		Auth: config.Auth{
+			Host: "http://localhost:8001",
+		},
 	}
 
 	db, err := initDB(cfg.Database)
@@ -39,7 +42,11 @@ func main() {
 		Db: db,
 	}
 
-	router.Handle("/add-menu", http.HandlerFunc(menuHandler.AddMenu))
+	authHandler := handler.AuthHandler{
+		Config: cfg.Auth,
+	}
+
+	router.Handle("/add-menu", authHandler.ValidateAdmin(menuHandler.AddMenu))
 	router.Handle("/menu", http.HandlerFunc(menuHandler.GetMenu))
 
 	fmt.Println("Menu service listen on port :8000")
