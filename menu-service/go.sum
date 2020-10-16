@@ -174,6 +174,7 @@ github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UV
 github.com/subosito/gotenv v1.2.0 h1:Slr1R9HxAlEKefgq5jn9U+DnETlIUa6HfgEzj0g5d7s=
 github.com/subosito/gotenv v1.2.0/go.mod h1:N0PQaV/YGNqwC0u51sEeR/aUtSLEXKX9iv69rRypqCw=
 github.com/tmc/grpc-websocket-proxy v0.0.0-20190109142713-0ad062ec5ee5/go.mod h1:ncp9v5uamzpCO7NfCPTXjqaC+bZgJeR0sMTm6dMHP7U=
+github.com/wskurniawan/intro-microservice v0.0.0-20201014151129-446c914405db h1:TbiJvvwSAyyLXR4qGrzRbU/ipCE8avuaKQKewWyafys=
 github.com/wskurniawan/intro-microservice v0.0.0-20201014151129-446c914405db/go.mod h1:oFqKrAH8800Gb0i7pEIMcWlRdKv/nIUeeve0eVHllac=
 github.com/wskurniawan/intro-microservice v0.0.0-20201014173535-d19509851baa h1:4YzUSyyHgPJ8a4lhbszdhyRS7BjkD91Z5ez1nMuG63w=
 github.com/wskurniawan/intro-microservice v0.0.0-20201014173535-d19509851baa/go.mod h1:oFqKrAH8800Gb0i7pEIMcWlRdKv/nIUeeve0eVHllac=

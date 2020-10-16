@@ -1,6 +1,10 @@
 package database
 
-import "gorm.io/gorm"
+import (
+	"fmt"
+
+	"gorm.io/gorm"
+)
 
 type Menu struct {
 	ID       int    `json:"id" gorm:"primary_key"`
@@ -15,6 +19,7 @@ func (menu *Menu) Insert(db *gorm.DB) error {
 		return result.Error
 	}
 
+	fmt.Println("Berhasil insert menu")
 	return nil
 }
 
@@ -22,7 +27,7 @@ func (menu *Menu) GetAll(db *gorm.DB) ([]Menu, error) {
 	var menus []Menu
 	result := db.Find(&menus)
 	if result.Error != nil {
-		return nil, result.Error
+		return menus, result.Error
 	}
 
 	return menus, nil

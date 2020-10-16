@@ -69,7 +69,6 @@ func (db *AuthDB) SignUp(w http.ResponseWriter, r *http.Request) {
 	utils.WrapAPISuccess(w, r, "Success", http.StatusOK)
 	return
 
-	
 }
 
 //TODO Buat login
@@ -94,5 +93,5 @@ func (db *AuthDB) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res.err := login.Login(db.Db); if 
+	// res.err := login.Login(db.Db); if
 }
