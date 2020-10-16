@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/menu-service/database"
-	"github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/menu-service/utils"
+	"github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/utils"
 	"gorm.io/gorm"
 )
 

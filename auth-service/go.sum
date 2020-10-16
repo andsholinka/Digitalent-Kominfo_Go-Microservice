@@ -18,6 +18,8 @@ github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc/go.mod h1:LOuy
 github.com/alecthomas/units v0.0.0-20151022065526-2efee857e7cf/go.mod h1:ybxpYRFXyAe+OPACYpWeL0wqObRcbAqCMya13uyzqw0=
 github.com/andsholinka/Digitalent-Kominfo_Go-Microservice v0.0.0-20201015151446-8b1b92d91eb9 h1:47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
 github.com/andsholinka/Digitalent-Kominfo_Go-Microservice v0.0.0-20201016015917-b033d5035cb0 h1:YIhRpl+K54Gn3fdDadj6mDkxyzrnxkbrzqBFptb2T9w=
+github.com/andsholinka/Digitalent-Kominfo_Go-Microservice v0.0.0-20201016035531-6e8f45f366a8 h1:Ij5qgEkkMMi6382yFDItw/wEgVgxZr+qPDJjAToQOPQ=
+github.com/andsholinka/Digitalent-Kominfo_Go-Microservice v0.0.0-20201016035531-6e8f45f366a8/go.mod h1:5ibae9nG8aYlKbHpfghfAVyn70/b7U4IL06Quyiwcx0=
 github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/menu-service v0.0.0-20201015151446-8b1b92d91eb9 h1:s+L484g7lev4fXStvmF8GNHCHZ6CbjcKiX5jLgu/mQE=
 github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/menu-service v0.0.0-20201015151446-8b1b92d91eb9/go.mod h1:vUNXVlHT3FLStzcgRL5vGKrWzGydcqMu9Zb7Mhuqa70=
 github.com/armon/circbuf v0.0.0-20150827004946-bbbad097214e/go.mod h1:3U/XgcO3hCbHZ8TKRvWD2dDTCfh9M9ya+I9JpbB7O8o=

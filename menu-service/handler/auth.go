@@ -6,9 +6,7 @@ import (
 	"net/http"
 
 	"github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/menu-service/config"
-	"github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/menu-service/utils"
-	// "github.com/wskurniawan/intro-microservice/service-product/config"
-	// "github.com/wskurniawan/intro-microservice/utils"
+	"github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/utils"
 )
 
 type AuthHandler struct {
