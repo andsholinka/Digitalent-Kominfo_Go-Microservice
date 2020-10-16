@@ -26,7 +26,7 @@ func main() {
 			Config:   "charset=utf8&parseTime=True&loc=Local",
 		},
 		Auth: config.Auth{
-			Host: "http://localhost:8001",
+			Host: "http://localhost:8000",
 		},
 	}
 

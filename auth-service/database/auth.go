@@ -7,9 +7,9 @@ import (
 
 type Auth struct {
 	ID       int    `gorm:"primary_key" json:="-"`
-	Username string `json:"username"`
-	Password string `json:"password"`
-	Token    string `json:"token"`
+	Username string `json:"username, omitempty"`
+	Password string `json:"password, omitempty"`
+	Token    string `json:"token, omitempty"`
 }
 
 func (auth *Auth) SignUp(db *gorm.DB) error {
@@ -20,7 +20,9 @@ func (auth *Auth) SignUp(db *gorm.DB) error {
 				return err
 			}
 		}
-		return err
+
+	} else {
+		return errors.Errorf("Duplicate Username")
 	}
 	return nil
 }

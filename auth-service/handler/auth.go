@@ -8,6 +8,7 @@ import (
 	"gorm.io/gorm"
 
 	"github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/auth-service/database"
+	// "github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/auth-service/utils"
 	"github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/utils"
 )
 
@@ -22,10 +23,10 @@ func ValidateAuth(w http.ResponseWriter, r *http.Request) {
 	}
 
 	authToken := r.Header.Get("Authorization")
-	if authToken == "" {
-		utils.WrapAPIError(w, r, "Invalid auth", http.StatusForbidden)
-		return
-	}
+	// if authToken == "" {
+	// 	utils.WrapAPIError(w, r, "Invalid auth", http.StatusForbidden)
+	// 	return
+	// }
 
 	if authToken != "respecker" {
 		utils.WrapAPIError(w, r, "Invalid auth", http.StatusForbidden)
@@ -62,19 +63,36 @@ func (db *AuthDB) SignUp(w http.ResponseWriter, r *http.Request) {
 	err = signup.SignUp(db.Db)
 	if err != nil {
 		utils.WrapAPIError(w, r, err.Error(), http.StatusBadRequest)
-
+		return
 	}
 
-	utils.WrapAPIError(w, r, "Success", http.StatusOK)
+	utils.WrapAPISuccess(w, r, "Success", http.StatusOK)
 	return
 
-	//TODO Buat login
+	
 }
 
+//TODO Buat login
 func (db *AuthDB) Login(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		utils.WrapAPIError(w, r, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
 		return
 	}
 
+	body, err := ioutil.ReadAll(r.Body)
+	defer r.Body.Close()
+	if err != nil {
+		utils.WrapAPIError(w, r, "cannot read body", http.StatusBadRequest)
+		return
+	}
+
+	var login database.Auth
+
+	err = json.Unmarshal(body, &login)
+	if err != nil {
+		utils.WrapAPIError(w, r, "error unmarshal : "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	res.err := login.Login(db.Db); if 
 }

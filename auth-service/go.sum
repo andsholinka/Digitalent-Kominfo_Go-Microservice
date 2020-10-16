@@ -22,6 +22,7 @@ github.com/andsholinka/Digitalent-Kominfo_Go-Microservice v0.0.0-20201016035531-
 github.com/andsholinka/Digitalent-Kominfo_Go-Microservice v0.0.0-20201016035531-6e8f45f366a8/go.mod h1:5ibae9nG8aYlKbHpfghfAVyn70/b7U4IL06Quyiwcx0=
 github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/menu-service v0.0.0-20201015151446-8b1b92d91eb9 h1:s+L484g7lev4fXStvmF8GNHCHZ6CbjcKiX5jLgu/mQE=
 github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/menu-service v0.0.0-20201015151446-8b1b92d91eb9/go.mod h1:vUNXVlHT3FLStzcgRL5vGKrWzGydcqMu9Zb7Mhuqa70=
+github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/menu-service v0.0.0-20201016035531-6e8f45f366a8 h1:h/bBeGccbtSlodri1kvMCJKuzKzbTy/3K6sMUai5MWE=
 github.com/armon/circbuf v0.0.0-20150827004946-bbbad097214e/go.mod h1:3U/XgcO3hCbHZ8TKRvWD2dDTCfh9M9ya+I9JpbB7O8o=
 github.com/armon/go-metrics v0.0.0-20180917152333-f0300d1749da/go.mod h1:Q73ZrmVTwzkszR9V5SSuryQ31EELlFMUz1kKyl939pY=
 github.com/armon/go-radix v0.0.0-20180808171621-7fddfc383310/go.mod h1:ufUuZ+zHj4x4TnLV4JWEpy2hxWSpsRywHrMgIH9cCH8=
