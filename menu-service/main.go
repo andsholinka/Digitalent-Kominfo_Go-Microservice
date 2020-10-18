@@ -7,6 +7,7 @@ import (
 
 	"github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/menu-service/config"
 	"github.com/andsholinka/Digitalent-Kominfo_Go-Microservice/menu-service/database"
+	"github.com/spf13/viper"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 
@@ -15,42 +16,44 @@ import (
 )
 
 func main() {
-	cfg := config.Config{
-		Database: config.Database{
-			Driver:   "mysql",
-			Host:     "localhost",
-			Port:     "3306",
-			User:     "root",
-			Password: "admin",
-			DbName:   "digitalent_microservice",
-			Config:   "charset=utf8&parseTime=True&loc=Local",
-		},
-		Auth: config.Auth{
-			Host: "http://localhost:8001",
-		},
-	}
-
-	db, err := initDB(cfg.Database)
+	cfg, err := getConfig()
 	if err != nil {
 		log.Panic(err)
 		return
 	}
 
+	db, err := initDB(cfg.Database)
+
 	router := mux.NewRouter()
 
-	menuHandler := handler.MenuHandler{
-		Db: db,
+	authMiddleware := handler.AuthMiddleware{
+		AuthService: cfg.AuthService,
+	}
+	menuHandler := handler.Menu{Db: db}
+
+	router.Handle("/add-menu", authMiddleware.ValidateAuth(http.HandlerFunc(menuHandler.AddMenu)))
+	router.Handle("/menu", http.HandlerFunc(menuHandler.GetAllMenu))
+
+	fmt.Printf("Server listen on :%s", cfg.Port)
+	log.Panic(http.ListenAndServe(fmt.Sprintf(":%s", cfg.Port), router))
+}
+
+func getConfig() (config.Config, error) {
+	viper.AddConfigPath(".")
+	viper.SetConfigType("yml")
+	viper.SetConfigName("config.yml")
+
+	if err := viper.ReadInConfig(); err != nil {
+		return config.Config{}, err
 	}
 
-	authHandler := handler.AuthHandler{
-		Config: cfg.Auth,
+	var cfg config.Config
+	err := viper.Unmarshal(&cfg)
+	if err != nil {
+		return config.Config{}, err
 	}
 
-	router.Handle("/add-menu", authHandler.ValidateAdmin(menuHandler.AddMenu))
-	router.Handle("/menu", http.HandlerFunc(menuHandler.GetMenu))
-
-	fmt.Println("Menu service listen on port :8000")
-	log.Panic(http.ListenAndServe(":8000", router))
+	return cfg, nil
 }
 
 func initDB(dbConfig config.Database) (*gorm.DB, error) {
@@ -60,12 +63,10 @@ func initDB(dbConfig config.Database) (*gorm.DB, error) {
 		return nil, err
 	}
 
-	err = db.AutoMigrate(database.Menu{})
+	err = db.AutoMigrate(&database.Menu{})
 	if err != nil {
 		return nil, err
 	}
-
-	fmt.Println("Connection to DB")
 
 	return db, nil
 }
